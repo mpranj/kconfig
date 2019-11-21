@@ -53,6 +53,8 @@ ecm_add_tests(
 find_package(Elektra)
 
 if (ELEKTRA_FOUND AND NOT DEFINED SkipTest)
+
+    find_library(ElektraTools elektratools REQUIRED)
     message(STATUS "Elektra ${ELEKTRA_VERSION} found")
     include_directories(${ELEKTRA_INCLUDE_DIR})
 
@@ -67,7 +69,7 @@ if (ELEKTRA_FOUND AND NOT DEFINED SkipTest)
             ../cmake-build-debug/src/core/kconfig_core_log_settings.cpp
             TEST_NAME kconfigelektra
             NAME_PREFIX kconfigcore-
-            LINK_LIBRARIES KF5::ConfigCore Qt5::Test Qt5::Concurrent ${ELEKTRA_LIBRARIES}
+            LINK_LIBRARIES KF5::ConfigCore Qt5::Test Qt5::Concurrent ${ELEKTRA_LIBRARIES} ${ElektraTools}
     )
     add_definitions(-DFEAT_ELEKTRA)
 endif (ELEKTRA_FOUND AND NOT DEFINED SkipTest)
